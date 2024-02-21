@@ -21,8 +21,8 @@ const TETROMINOES = {
         [0,0,0]
     ],
     'I': [
-        [1,1,1,1],
         [0,0,0,0],
+        [1,1,1,1],
         [0,0,0,0],
         [0,0,0,0]
     ],
@@ -153,7 +153,7 @@ function moveTetrominoRight() {
     tetromino.column += 1;
 }
 
-let mySound = new Audio('my_audio_file.wav')
+let mySound = new Audio('tetris.mp3')
 mySound.play()
 
 document.getElementById('music').loop=true;
