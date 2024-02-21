@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: linear-gradient(90deg, rgb(176, 140, 195), rgb(107, 47, 139));
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-table {
+  background-color: rgb(186, 66, 176);
+  width: 300px;
+  height: 200px;
+  border: solid rgb(33, 31, 31) 7px;
+  border-radius: 5px;
+  margin-right: 200px;
+  box-shadow: 10px 5px 5px rgb(53, 42, 42);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-shadow: 2px 2px 3px white;
+}
+
+#game-title span {
+  position: relative;
+  display: inline-block;
+  font-size: 50px;
+  text-transform: uppercase;
+  animation: flip 2s infinite;
+  animation-delay: calc(0.2s * var(--i));
+}
+
+@keyframes flip {
+  0%,
+  80% {
+    transform: rotateY(360deg);
+  }
+}
+
+.grid {
+  background: rgb(88, 4, 74);
+  padding: 0.5vh;
+  display: grid;
+  grid-template-columns: repeat(10, auto);
+  gap: 0.5vh;
+  border: solid rgb(33, 31, 31) 5px;
+}
+
+.grid > div {
+  height: min(4vh, 7vw);
+  width: min(4vh, 7vw);
+  background-color: rgba(182, 166, 166, 0.085);
+  border-radius: 0.3vh;
+}
+
+.grid .O {
+  background-color: yellow;
+}
+
+.grid .J {
+  background-color: green;
+}
+
+.grid .I {
+  background-color: magenta;
+}
+
+.grid .T {
+  background-color: grey;
+}
+
+.grid .Z {
+  background-color: red;
+}
+
+.grid .L {
+  background-color: blue;
+}
+
+.grid .S {
+  background-color: orange;
+}
