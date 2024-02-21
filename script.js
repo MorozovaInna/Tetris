@@ -153,8 +153,6 @@ function moveTetrominoRight() {
     tetromino.column += 1;
 }
 
-let mySound = new Audio('tetris.mp3')
-mySound.play()
-
-document.getElementById('music').loop=true;
-document.getElementById('music').play();
+let mySound = new Audio('tetris.mp3');
+mySound.loop = true;
+mySound.play();
