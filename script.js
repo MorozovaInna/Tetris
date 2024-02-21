@@ -1,9 +1,3 @@
-// add new figures
-// figure styling
-// add function random (return random figure)
-// center the figure not regarding width
-
-
 const PLAYFIELD_COLUMNS = 10;
 const PLAYFIELD_ROWS = 20;
 const TETROMINO_NAMES = [
