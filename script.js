@@ -233,6 +233,7 @@ mySound.play();
 let intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL);
 
 function onKeyDown(e) {
+    console.log("keydown", e.key);
     switch (e.key) {
         case 'ArrowUp':
             rotate();
@@ -245,6 +246,9 @@ function onKeyDown(e) {
             break;
         case 'ArrowRight':
             moveTetrominoRight();
+            break;
+        case ' ':
+            pauseGame();
             break;
     }
     draw();
@@ -282,6 +286,7 @@ function checkGameOver() {
     for (let column = 0; column < tetromino.matrix.length; column++) {
         if (tetromino.matrix[firstVisibleTetrominoRow][column] == 0) { continue; }
         clearInterval(intervalID);
+        mySound.pause();
         return true;
     }
     return false;
@@ -301,3 +306,31 @@ function displayPopUp() {
     overlay.style.display = 'block';
     popup.style.display = 'block';
 }
+
+let pauseClosePopup = document.getElementById("pause-popupclose");
+let pauseOverlay = document.getElementById("pause-overlay");
+let pausePopup = document.getElementById("pause-popup");
+
+function displayPausePopUp() {
+    pauseOverlay.style.display = 'block';
+    pausePopup.style.display = 'block';
+}
+
+function pauseGame() {
+    console.log("pause game", intervalID);
+    if (intervalID) {
+        clearInterval(intervalID);
+        intervalID = null;
+        console.log(mySound.playbackRate);
+        mySound.pause();
+        displayPausePopUp();
+    } else {
+        console.log(mySound.playbackRate);
+        pauseOverlay.style.display = 'none';
+        pausePopup.style.display = 'none';
+        intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL - (level - 1) * 30);
+        mySound.play();
+    }
+    
+}
+
