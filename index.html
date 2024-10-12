@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <link href="https://fonts.cdnfonts.com/css/brick" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <!-- Game Grid -->
+      <div class="grid">
+        <!-- Game blocks will be generated here dynamically -->
+      </div>
+
+      <!-- Info and Controls Section -->
+      <div class="info-controls">
+        <div class="game">
+          <h1>TETRIS</h1>
+          <p id="score">Score: 0</p>
+          <p id="level">Level: 1</p>
+        </div>
+
+        <div class="controls">
+          <h2>Controls</h2>
+          <button id="rotate" class="key"><img src="https://img.icons8.com/ios-filled/50/000000/up-squared.png" /> Rotate</button>
+          <button id="left" class="key"><img src="https://img.icons8.com/ios-filled/50/000000/left-squared.png" /> Move Left</button>
+          <button id="right" class="key"><img src="https://img.icons8.com/ios-filled/50/000000/right-squared.png" /> Move Right</button>
+          <button id="down" class="key"><img src="https://img.icons8.com/ios-filled/50/000000/down-squared.png" /> Move Down</button>
+        </div>
+
+        <button class="start" onclick="startGame()">play</button>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="popup">
+      <div class="popupcontrols">
+        <button id="popupclose">Play again</button>
+      </div>
+      <div class="popupcontent">
+        <p>Game over</p>
+      </div>
+    </div>
+
+    <div id="pause-overlay">
+      <div id="pause-popup">
+        <div class="pause-popupcontent">
+          <h1>Game paused</h1>
+          <p>To continue playing press "Space"</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
