@@ -15,16 +15,36 @@ body {
   align-items: center;
 }
 
+.main-page {
+  background-image: url(resources/images/tetris.png);
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  font-size: 100px;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
 .game h1 {
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .game-container {
   display: flex;
-  width: 90%;
+  width: 100%;
   max-width: 1200px;
+  height: 95vh;
   justify-content: center;
-  gap: 0px;
 }
 
 .info-controls {
@@ -36,6 +56,14 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   border: solid rgb(33, 31, 31) 5px;
+}
+
+#soundbutton {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 10px;
+  float: right;
+  cursor: pointer;
 }
 
 .controls {
@@ -55,6 +83,13 @@ body {
   align-items: center;
   margin-top: 20px;
   width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+}
+
+img {
+  margin-right: 10px;
 }
 
 #score {
@@ -68,6 +103,7 @@ body {
   grid-template-columns: repeat(10, auto);
   gap: 0.5vh;
   border: solid rgb(33, 31, 31) 5px;
+  border-right: none;
   border-radius: 10px;
 }
 
@@ -142,7 +178,7 @@ body {
   border-radius: 5px;
 }
 
-.start {
+#restart {
   background-color: red;
   border: none;
   color: black;
@@ -153,7 +189,8 @@ body {
   font-size: 25px;
   margin: 4px 2px;
   cursor: pointer;
-  margin-top: 100px;
+  border-radius: 10px;
+  margin-top: 15px;
 }
 
 .popupcontent {
@@ -208,7 +245,6 @@ body {
 
 h1 {
   margin-bottom: 20px;
-  text-transform: uppercase;
 }
 
 p {

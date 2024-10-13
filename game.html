@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris</title>
+    <link href="https://fonts.cdnfonts.com/css/brick" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="game-container">
+      <div class="grid"></div>
+
+      <div class="info-controls">
+        <div id="mutebut">
+          <button type="button" id="soundbutton"><img id="sound-icon" src="resources/images/mute.png" width="30" height="30" /></button>
+        </div>
+        <div class="game">
+          <h1>TETRIS</h1>
+          <p id="score">Score: 0</p>
+          <p id="level">Level: 1</p>
+        </div>
+
+        <div class="controls">
+          <h2>Controls</h2>
+          <button id="rotate" class="key"><img src="resources/images/up.png" width="40" height="40" /> Rotate</button>
+          <button id="left" class="key"><img src="resources/images/left.png" width="40" height="40" /> Move Left</button>
+          <button id="right" class="key"><img src="resources/images/right.png" width="40" height="40" /> Move Right</button>
+          <button id="down" class="key"><img src="resources/images/down.png" width="40" height="40" /> Move Down</button>
+          <button id="pause" class="key"><img src="resources/images/space.png" width="40" height="40" /> Pause</button>
+        </div>
+
+        <button id="restart" onclick="restartGame()">restart</button>
+      </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="popup">
+      <div class="popupcontrols">
+        <button id="popupclose">Play again</button>
+      </div>
+      <div class="popupcontent">
+        <p>Game over</p>
+      </div>
+    </div>
+
+    <div id="pause-overlay">
+      <div id="pause-popup">
+        <div class="pause-popupcontent">
+          <h1>Game paused</h1>
+          <p>To continue playing press "Space"</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

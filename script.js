@@ -47,14 +47,15 @@ const TETROMINOES = {
         [0,0,0]
     ]
 }
-const mySound = new Audio('tetris.mp3');
+const mySound = new Audio('resources/music/tetris.mp3');
 
 
 let playfield;
 let tetromino;
 let score = 0; 
 let level = 1;
-let gameOver = false;
+let isGameOver = false;
+let isGamePaused = false;
 
 
 function convertPositionToIndex(row, column) {
@@ -104,7 +105,7 @@ function placeTetromino() {
     }
 
     if (checkGameOver()) {
-        gameOver = true;
+        isGameOver = true;
         displayPopUp();
     }
 
@@ -147,7 +148,6 @@ function calculateLevel() {
         document.getElementById('level').innerHTML = 'Level:' + level;
         clearInterval(intervalID);
         intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL - (level - 1) * 30);
-        mySound.playbackRate += 0.05;
     }
 }
 
@@ -235,6 +235,9 @@ mySound.play();
 let intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL);
 
 function onKeyDown(e) {
+    if ((isGamePaused) && (e.key != ' ')) {
+        return;
+    }
     switch (e.key) {
         case 'ArrowUp':
             rotate();
@@ -319,17 +322,45 @@ function displayPausePopUp() {
 
 function pauseGame() {
     if (intervalID) {
-        if (gameOver) { 
+        if (isGameOver) { 
             return;
         }
         clearInterval(intervalID);
+        isGamePaused = true;
         intervalID = null;
         mySound.pause();
         displayPausePopUp();
     } else {
+        isGamePaused = false;
         pauseOverlay.style.display = 'none';
         pausePopup.style.display = 'none';
         intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL - (level - 1) * 30);
         mySound.play();
     }
 }
+
+function restartGame() {
+    document.location.reload();
+}
+
+document.getElementById("rotate").addEventListener("click", rotate);
+document.getElementById("left").addEventListener("click", moveTetrominoLeft);
+document.getElementById("right").addEventListener("click", moveTetrominoRight);
+document.getElementById("down").addEventListener("click", moveTetrominoDown);
+document.getElementById("pause").addEventListener("click", pauseGame);
+document.getElementById("restart").addEventListener("click", restartGame);
+
+const btn = document.getElementById("soundbutton");
+const soundIcon = document.getElementById('sound-icon');
+
+function mute() {
+    mySound.muted = !mySound.muted;
+
+    if (mySound.muted) {
+        soundIcon.src = "resources/images/volume.png";
+    } else {
+        soundIcon.src = "resources/images/mute.png";
+    }
+}
+
+btn.addEventListener('click', mute);
