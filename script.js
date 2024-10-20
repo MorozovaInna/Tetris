@@ -48,6 +48,7 @@ const TETROMINOES = {
     ]
 }
 const mySound = new Audio('resources/music/tetris.mp3');
+mySound.muted = true;
 
 
 let playfield;
@@ -231,7 +232,7 @@ function hasCollisions(row, column){
 
 draw();
 mySound.loop = true;
-mySound.play();
+//mySound.play();
 let intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL);
 
 function onKeyDown(e) {
@@ -342,7 +343,38 @@ function pauseGame() {
 }
 
 function restartGame() {
-    document.location.reload();
+    // Reset playfield
+    playfield.forEach((row, rowIndex) => {
+        playfield[rowIndex] = new Array(PLAYFIELD_COLUMNS).fill(0);
+    });
+
+    // Reset score, level, and game state
+    score = 0;
+    level = 1;
+    isGameOver = false;
+    isGamePaused = false;
+    
+    // Update score and level display
+    document.getElementById('score').innerHTML = 'Score: ' + score;
+    document.getElementById('level').innerHTML = 'Level: ' + level;
+    
+    // Clear all tetromino classes from the grid
+    cells.forEach(cell => cell.removeAttribute('class'));
+
+    // Generate a new tetromino and restart the game loop
+    generateTetromino();
+    draw();
+    
+    // Restart the interval
+    clearInterval(intervalID);
+    intervalID = setInterval(() => {
+        moveTetrominoDown();
+        draw();
+    }, INITIAL_INTERVAL);
+    
+    // Restart the music
+    mySound.currentTime = 0; // Restart music from the beginning
+    mySound.play();
 }
 
 document.getElementById("rotate").addEventListener("click", rotate);
@@ -356,13 +388,12 @@ const btn = document.getElementById("soundbutton");
 const soundIcon = document.getElementById('sound-icon');
 
 function mute() {
-    mySound.muted = !mySound.muted;
-
-    if (mySound.muted) {
-        soundIcon.src = "resources/images/mute.png";
-    } else {
-        soundIcon.src = "resources/images/volume.png";
+    if (mySound.paused || (mySound.duration === 0)) {
+        mySound.play();
     }
+
+    mySound.muted = !mySound.muted;
+    soundIcon.src = mySound.muted ? "resources/images/mute.png" : "resources/images/volume.png";
 }
 
 btn.addEventListener('click', mute);
