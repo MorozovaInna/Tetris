@@ -106,7 +106,7 @@ function placeTetromino() {
 
     if (checkGameOver()) {
         isGameOver = true;
-        displayPopUp();
+        displayGameoverPopup();
     }
 
     generateTetromino();
@@ -296,22 +296,22 @@ function checkGameOver() {
     return false;
 }
 
-let closePopup = document.getElementById("popupclose");
-let overlay = document.getElementById("overlay");
-let popup = document.getElementById("popup");
- 
-closePopup.onclick = function () {
-    overlay.style.display = 'none';
-    popup.style.display = 'none';
+let gameoverClosePopup = document.getElementById("gameover-close");
+let gameoverOverlay = document.getElementById("gameover-overlay");
+let gameoverPopup = document.getElementById("gameover-popup");
+
+function displayGameoverPopup() {
+    gameoverOverlay.style.display = 'block';
+    gameoverPopup.style.display = 'block';
+}
+
+gameoverClosePopup.onclick = function () {
+    gameoverOverlay.style.display = 'none';
+    gameoverPopup.style.display = 'none';
     document.location.reload();
 }
 
-function displayPopUp() {
-    overlay.style.display = 'block';
-    popup.style.display = 'block';
-}
-
-let pauseClosePopup = document.getElementById("pause-popupclose");
+let pauseClosePopup = document.getElementById("pause-close");
 let pauseOverlay = document.getElementById("pause-overlay");
 let pausePopup = document.getElementById("pause-popup");
 
@@ -320,9 +320,17 @@ function displayPausePopUp() {
     pausePopup.style.display = 'block';
 }
 
+pauseClosePopup.onclick = function () {
+    isGamePaused = false;
+    pauseOverlay.style.display = 'none';
+    pausePopup.style.display = 'none';
+    intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL - (level - 1) * 30);
+    mySound.play();
+}
+
 function pauseGame() {
     if (intervalID) {
-        if (isGameOver) { 
+        if (isGameOver) {
             return;
         }
         clearInterval(intervalID);
@@ -330,12 +338,6 @@ function pauseGame() {
         intervalID = null;
         mySound.pause();
         displayPausePopUp();
-    } else {
-        isGamePaused = false;
-        pauseOverlay.style.display = 'none';
-        pausePopup.style.display = 'none';
-        intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL - (level - 1) * 30);
-        mySound.play();
     }
 }
 
@@ -357,9 +359,9 @@ function mute() {
     mySound.muted = !mySound.muted;
 
     if (mySound.muted) {
-        soundIcon.src = "resources/images/volume.png";
-    } else {
         soundIcon.src = "resources/images/mute.png";
+    } else {
+        soundIcon.src = "resources/images/volume.png";
     }
 }
 
