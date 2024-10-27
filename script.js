@@ -232,7 +232,6 @@ function hasCollisions(row, column){
 
 draw();
 mySound.loop = true;
-//mySound.play();
 let intervalID = setInterval(() => { moveTetrominoDown(); draw(); }, INITIAL_INTERVAL);
 
 function onKeyDown(e) {
@@ -343,37 +342,30 @@ function pauseGame() {
 }
 
 function restartGame() {
-    // Reset playfield
     playfield.forEach((row, rowIndex) => {
         playfield[rowIndex] = new Array(PLAYFIELD_COLUMNS).fill(0);
     });
 
-    // Reset score, level, and game state
     score = 0;
     level = 1;
     isGameOver = false;
     isGamePaused = false;
     
-    // Update score and level display
-    document.getElementById('score').innerHTML = 'Score: ' + score;
-    document.getElementById('level').innerHTML = 'Level: ' + level;
+    document.getElementById('score').innerHTML = 'Score:' + score;
+    document.getElementById('level').innerHTML = 'Level:' + level;
     
-    // Clear all tetromino classes from the grid
     cells.forEach(cell => cell.removeAttribute('class'));
 
-    // Generate a new tetromino and restart the game loop
     generateTetromino();
     draw();
     
-    // Restart the interval
     clearInterval(intervalID);
     intervalID = setInterval(() => {
         moveTetrominoDown();
         draw();
     }, INITIAL_INTERVAL);
     
-    // Restart the music
-    mySound.currentTime = 0; // Restart music from the beginning
+    mySound.currentTime = 0;
     mySound.play();
 }
 

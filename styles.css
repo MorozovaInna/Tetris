@@ -9,7 +9,8 @@
 
 body {
   background: linear-gradient(90deg, rgb(230, 215, 238), rgb(127, 72, 157));
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,7 @@ body {
   align-items: center;
 }
 
-.button {
+.play-button {
   font-size: 100px;
   font-weight: bold;
   background-color: transparent;
@@ -42,57 +43,10 @@ body {
 .game-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
   max-width: 1200px;
-  height: 100vh;
   justify-content: center;
-}
-
-.info-controls {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  background-color: rgba(186, 66, 176, 0.9);
+  margin-top: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  border: solid rgb(33, 31, 31) 5px;
-}
-
-#soundbutton {
-  background-color: transparent;
-  border: none;
-  margin-bottom: 10px;
-  float: right;
-  cursor: pointer;
-}
-
-.controls {
-  display: block;
-  justify-content: last baseline;
-}
-
-.controls h2 {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
-}
-
-.key {
-  margin: 5px 0;
-  padding: 10px;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  width: 100%;
-  border-radius: 10px;
-  background-color: white;
-  cursor: pointer;
-}
-
-#score {
-  margin-bottom: 10px;
 }
 
 .grid {
@@ -102,8 +56,6 @@ body {
   grid-template-columns: repeat(10, 1fr);
   gap: 0.5vh;
   border: solid rgb(33, 31, 31) 5px;
-  height: 100%;
-  border-right: none;
   border-radius: 10px;
 }
 
@@ -149,6 +101,54 @@ body {
   box-shadow: inset 2px 2px 3px white;
 }
 
+.info-controls {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: rgba(186, 66, 176, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  border: solid rgb(33, 31, 31) 5px;
+}
+
+.controls {
+  display: block;
+  justify-content: last baseline;
+}
+
+.controls h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+.key {
+  margin: 5px 0;
+  padding: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+#score {
+  margin-bottom: 10px;
+}
+
+#soundbutton {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 10px;
+  float: right;
+  cursor: pointer;
+}
+
 #gameover-overlay {
   position: absolute;
   top: 0;
@@ -175,20 +175,6 @@ body {
   align-items: center;
   display: none;
   border-radius: 5px;
-}
-
-#restart {
-  background-color: red;
-  border: none;
-  color: black;
-  padding: 15px 15px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 20px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 10px;
-  margin-top: 15px;
 }
 
 .gameover-content {
@@ -250,6 +236,20 @@ body {
   background-color: white;
 }
 
+#restart {
+  background-color: red;
+  border: none;
+  color: black;
+  padding: 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
 h1 {
   margin-bottom: 20px;
 }
@@ -259,63 +259,87 @@ p {
 }
 
 @media only screen and (max-width: 600px) {
-  .body {
+  body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
   }
+
   .game-container {
-    width: 500px;
-    height: 450px;
+    margin-top: 90px;
+  }
+
+  .game h1 {
+    font-size: 20px;
+  }
+
+  .controls h2 {
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+  }
+
+  .grid {
+    border-radius: 5px;
+    padding: 0;
+    gap: 0.2vh;
+  }
+
+  .grid > div {
+    height: 20px;
+    width: 18px;
+    padding: 0;
+    margin: 0;
   }
 
   .key {
     margin-top: 15px;
     padding: 5px;
     font-size: 0.7rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
     color: black;
   }
 
   #restart {
-    background-color: red;
-    border: none;
-    color: black;
     padding: 5px 5px;
-    text-align: center;
-    text-decoration: none;
     font-size: 0.7rem;
-    cursor: pointer;
     border-radius: 5px;
-    margin-top: 15px;
     width: 100%;
   }
-  .game h1 {
-    font-size: 20px;
+
+  #pause-popup {
+    width: 300px;
+    margin-left: -150px;
   }
-  .controls h2 {
-    margin-bottom: 10px;
-    font-size: 0.5rem;
+
+  .pause-content {
+    font-size: 30px;
+    margin-top: 30px;
   }
-  .grid {
-    background: rgb(88, 4, 74);
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    border: solid rgb(33, 31, 31) 5px;
-    border-right: none;
-    border-radius: 5px;
-    row-gap: 0;
+
+  #pause-close {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: black;
+  }
+
+  #gameover-close {
+    color: black;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    height: 100%;
+    width: 100%;
+  }
+
+  .game-container {
+    margin-top: 100px;
   }
 
   .grid > div {
-    height: min(2vh, 5vw);
-    width: min(2vh, 5vw);
-    background-color: rgba(182, 166, 166, 0.085);
+    height: min(3vh, 6vw);
+    width: min(3vh, 6vw);
     border-radius: 0.3vh;
     padding: 0;
     margin: 0;
@@ -323,42 +347,22 @@ p {
   }
 
   #pause-popup {
-    position: absolute;
-    background: #cfdb29;
     width: 300px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    display: none;
-    border-radius: 5px;
     margin-left: -150px;
   }
+
   .pause-content {
     font-size: 30px;
     margin-top: 30px;
-    text-align: center;
   }
 
   #pause-close {
     font-size: 30px;
-    cursor: pointer;
-    width: 100%;
-    margin-left: 0;
     margin-bottom: 20px;
-    position: absolute;
-    background-color: white;
     color: black;
   }
 
   #gameover-close {
-    font-size: 50px;
-    cursor: pointer;
-    width: 100%;
-    margin-left: 0;
-    bottom: 20px;
-    position: absolute;
-    background-color: white;
     color: black;
   }
 }
